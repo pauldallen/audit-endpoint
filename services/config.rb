@@ -1,24 +1,3 @@
-coreo_aws_rule "ec2-ip-address-whitelisted" do
-  action :define
-  service :ec2
-  link "http://kb.cloudcoreo.com/mydoc_ec2-ip-address-whitelisted.html"
-  description "Security Group contains IP address"
-  category "Security"
-  suggested_action "Review Security Group to ensure that the host ip address added is to allowed access."
-  level "Warning"
-  objectives ["security_groups"]
-  audit_objects ["security_groups.ip_permissions.ip_ranges.cidr_ip"]
-  operators ["=~"]
-  raise_when [/\/32/]
-end
-
-coreo_aws_rule_runner "ec2" do
-  service :ec2
-  id_map ["object.security_groups.group_id"]
-  rules ["ec2-ip-address-whitelisted"]
-  regions ["us-east-1"]
-  action :run
-end
 coreo_agent_selector_rule "check-echo" do
   action :define
   timeout 5
@@ -86,14 +65,4 @@ coreo_agent_rule_runner 'agent-rules' do
   action :run
   regions ['us-east-1', 'us-west-2']
   rules ['echo-hello', 'mysql-3']
-end
-
-coreo_uni_util_notify "agent-email" do
-  action :notify
-  type 'email'
-  allow_empty true
-  payload 'COMPOSITE::coreo_agent_rule_runner.agent-rules.report'
-  endpoint ({
-      to: 'nandesh@cloudcoreo.com'
-  })
 end
