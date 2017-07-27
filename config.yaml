@@ -1,0 +1,9 @@
+variables:
+  AUDIT_AGENT_ALERT_LIST:
+      required: false
+      type: array
+      default:
+        - mongod-version-3-4
+        - echo-hello
+        - mysql-3
+        - check-telnetd
