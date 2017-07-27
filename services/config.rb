@@ -14,7 +14,7 @@ coreo_agent_audit_rule 'echo-hello' do
   display_name 'Echo hello'
   description 'Echo hello and check for the output'
   category 'Security'
-  suggested_action 'Unset MySQL password in your ENV'
+  suggested_action 'Make sure hello is the output.'
   level 'High'
   selectors ['check-echo']
   timeout 5
@@ -63,6 +63,5 @@ end
 
 coreo_agent_rule_runner 'agent-rules' do
   action :run
-  regions ['us-east-1', 'us-west-2']
   rules ['echo-hello', 'mysql-3']
 end
