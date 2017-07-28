@@ -3,7 +3,5 @@ variables:
       required: false
       type: array
       default:
-        - mongod-version-3-4
         - echo-hello
-        - mysql-3
-        - check-telnetd
+        - mysql-env-password
