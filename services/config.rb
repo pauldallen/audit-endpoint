@@ -28,48 +28,6 @@ coreo_agent_audit_rule 'echo-hello' do
   end
 end
 
-coreo_agent_selector_rule "check-mongod" do
-  action :define
-  timeout 5
-  control 'check if echo exist' do
-    describe command('mongod') do
-      it { should exist }
-    end
-  end
-end
-
-coreo_agent_audit_rule "mongod-version-3-4" do
-  action :define
-  link "http://kb.cloudcoreo.com/"
-  display_name "Verify mongo installation is 3.4"
-  description "Verify mongo installation is 3.4"
-  category "Security"
-  suggested_action "Install latest mongo version 3.4.x"
-  timeout 5
-  selectors ['check-mongod']
-  control 'Verify mongo installation is 3.4' do
-    describe command('mongod --version') do
-      its('stdout') { should match (/3.4/) }
-    end
-  end
-end
-
-coreo_agent_audit_rule "check-telnetd" do
-  action :define
-  link "http://kb.cloudcoreo.com/"
-  display_name "Telnetd should'nt be installed"
-  description "Telnetd should'nt be installed"
-  category "Security"
-  suggested_action "Uninstall Telnetd"
-  level "High"
-  timeout 5
-  control 'verify that telnet package is not installed' do
-    describe package('telnetd') do
-      it { should_not be_installed }
-    end
-  end
-end
-
 coreo_agent_audit_rule "mysql-env-password" do
   action :define
   link "http://kb.cloudcoreo.com/"
