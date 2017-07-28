@@ -28,6 +28,16 @@ coreo_agent_audit_rule 'echo-hello' do
   end
 end
 
+coreo_agent_selector_rule "check-mysql-installed" do
+  action :define
+  timeout 5
+  control 'check if echo exist' do
+    describe command('mysqld') do
+      it { should exist }
+    end
+  end
+end
+
 coreo_agent_audit_rule "mysql-env-password" do
   action :define
   link "http://kb.cloudcoreo.com/"
@@ -36,7 +46,7 @@ coreo_agent_audit_rule "mysql-env-password" do
   category "Security"
   suggested_action "Unset MySQL password in your ENV"
   level "High"
-  selectors ["check-mysql"]
+  selectors ["check-mysql-installed"]
   control 'mysql-3' do
     impact 1.0
     title 'Do not store your MySQL password in your ENV'
