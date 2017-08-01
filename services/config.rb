@@ -1,4 +1,4 @@
-coreo_agent_selector_rule "check-echo" do
+coreo_agent_selector_rule 'check-echo' do
   action :define
   timeout 5
   control 'check if echo exist' do
@@ -38,7 +38,7 @@ coreo_agent_selector_rule "check-redis-cli" do
   end
 end
 
-coreo_agent_audit_rule "env-user-password" do
+coreo_agent_audit_rule 'env-user-password' do
   action :define
   link "http://kb.cloudcoreo.com/"
   display_name "Do not store your user password in your ENV"
