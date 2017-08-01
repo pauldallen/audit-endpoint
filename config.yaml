@@ -4,4 +4,4 @@ variables:
       type: array
       default:
         - echo-hello
-        - mysql-env-password
+        - env-user-password
