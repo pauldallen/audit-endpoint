@@ -38,12 +38,6 @@ coreo_agent_audit_rule "env-user-password" do
   level "High"
   selectors ['check-echo']
   control 'user-password' do
-    impact 1.0
-    title 'Do not store your User password in your ENV'
-    desc '
-  Storing credentials in your ENV may easily expose
-  them to an attacker. Prevent this at all costs.
-      '
     describe command('env') do
       its('stdout') { should_not match(/^USER_PWD=/) }
     end
