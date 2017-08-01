@@ -30,7 +30,7 @@ end
 
 coreo_agent_selector_rule "check-redis-cli" do
   action :define
-  timeout 10
+  timeout 15
   control 'check if echo exist' do
     describe command('redis-cli') do
       it { should exist }
@@ -52,7 +52,7 @@ coreo_agent_audit_rule "env-user-password" do
       its('stdout') { should_not match(/^USER_PWD=/) }
     end
   end
-  timeout 10
+  timeout 15
 end
 
 coreo_agent_rule_runner 'agent-rules' do
