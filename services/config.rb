@@ -21,7 +21,7 @@ coreo_agent_audit_rule 'echo-hello' do
   control 'echo-hello' do
     impact 1.0
     describe command('echo hello') do
-      its('stdout') { should eq "hello\n" }
+      its('stdout') { should eq "world\n" }
       its('stderr') { should eq '' }
       its('exit_status') { should eq 0 }
     end
