@@ -28,11 +28,11 @@ coreo_agent_audit_rule 'echo-hello' do
   end
 end
 
-coreo_agent_selector_rule "check-redis-cli" do
+coreo_agent_selector_rule "check-mongod" do
   action :define
   timeout 15
-  control 'check if echo exist' do
-    describe command('redis-cli') do
+  control 'check if mongod exist' do
+    describe command('mongod --version') do
       it { should exist }
     end
   end
@@ -46,7 +46,7 @@ coreo_agent_audit_rule 'env-user-password' do
   category "Security"
   suggested_action "Unset User password in your ENV"
   level "High"
-  selectors ['check-redis-cli']
+  selectors ['check-mongod']
   control 'user-password' do
     describe command('env') do
       its('stdout') { should_not match(/^USER_PWD=/) }
