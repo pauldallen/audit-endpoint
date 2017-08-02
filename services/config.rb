@@ -32,7 +32,7 @@ coreo_agent_selector_rule "check-mongod" do
   action :define
   timeout 15
   control 'check if mongod exist' do
-    describe command('mongod --version') do
+    describe command('mongod') do
       it { should exist }
     end
   end
