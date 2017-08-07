@@ -55,7 +55,26 @@ coreo_agent_audit_rule 'env-user-password' do
   timeout 15
 end
 
+coreo_agent_selector_rule 'check-linux' do
+  action :define
+  link 'http://kb.cloudcoreo.com/'
+  display_name 'Selector to check if os is linux'
+  timeout 5
+  control 'check-linux' do
+    describe command('uname') do
+      its('stdout') { should eq "Linux\n" }
+    end
+end
+  
+coreo_agent_audit_profile 'linux-benchmark' do
+  action :define
+  selectors ['check-linux']
+  profile 'https://github.com/dev-sec/linux-baseline/archive/master.zip'
+  timeout 130
+end
+
 coreo_agent_rule_runner 'agent-rules' do
   action :run
   rules ${AUDIT_AGENT_RULES_LIST}
+  profiles ['linux-benchmark']
 end
