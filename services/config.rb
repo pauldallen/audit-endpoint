@@ -57,13 +57,12 @@ end
 
 coreo_agent_selector_rule 'check-linux' do
   action :define
-  link 'http://kb.cloudcoreo.com/'
-  display_name 'Selector to check if os is linux'
   timeout 5
   control 'check-linux' do
     describe command('uname') do
       its('stdout') { should eq "Linux\n" }
     end
+  end
 end
   
 coreo_agent_audit_profile 'linux-benchmark' do
