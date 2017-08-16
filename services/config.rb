@@ -75,5 +75,4 @@ end
 coreo_agent_rule_runner 'agent-rules' do
   action :run
   rules ${AUDIT_AGENT_RULES_LIST}
-  profiles ['linux-benchmark']
 end
