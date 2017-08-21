@@ -1,6 +1,6 @@
 coreo_agent_selector_rule 'check-echo' do
   action :define
-  timeout 5
+  timeout 15
   control 'check if echo exist' do
     describe command('echo') do
       it { should exist }
@@ -17,7 +17,7 @@ coreo_agent_audit_rule 'echo-hello' do
   suggested_action 'Make sure hello is the output.'
   level 'low'
   selectors ['check-echo']
-  timeout 5
+  timeout 15
   control 'echo-hello' do
     impact 1.0
     describe command('echo hello') do
