@@ -1,6 +1,6 @@
 coreo_agent_selector_rule 'check-echo' do
   action :define
-  timeout 15
+  timeout 30
   control 'check if echo exist' do
     describe command('echo') do
       it { should exist }
@@ -17,7 +17,7 @@ coreo_agent_audit_rule 'echo-hello' do
   suggested_action 'Make sure hello is the output.'
   level 'low'
   selectors ['check-echo']
-  timeout 15
+  timeout 30
   control 'echo-hello' do
     impact 1.0
     describe command('echo hello') do
@@ -30,7 +30,7 @@ end
 
 coreo_agent_selector_rule "check-mongod" do
   action :define
-  timeout 15
+  timeout 30
   control 'check if mongod exist' do
     describe command('mongod') do
       it { should exist }
@@ -52,12 +52,12 @@ coreo_agent_audit_rule 'env-user-password' do
       its('stdout') { should_not match(/^USER_PWD=/) }
     end
   end
-  timeout 15
+  timeout 30
 end
 
 coreo_agent_selector_rule 'check-linux' do
   action :define
-  timeout 5
+  timeout 30
   control 'check-linux' do
     describe command('uname') do
       its('stdout') { should eq "Linux\n" }
