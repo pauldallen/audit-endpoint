@@ -12,7 +12,7 @@ coreo_agent_audit_profile 'linux-cis' do
   action :define
   selectors ['check-echo']
   profile 'https://github.com/dev-sec/cis-dil-benchmark/archive/master.zip'
-  timeout 120
+  timeout 600
 end
 
 coreo_agent_rule_runner 'agent-rules' do
