@@ -69,10 +69,18 @@ coreo_agent_audit_profile 'linux-benchmark' do
   action :define
   selectors ['check-linux']
   profile 'https://github.com/dev-sec/linux-baseline/archive/master.zip'
-  timeout 30
+  timeout 120
+end
+
+coreo_agent_audit_profile 'linux-cis' do
+  action :define
+  selectors ['check-linux']
+  profile 'https://github.com/dev-sec/cis-dil-benchmark/archive/master.zip'
+  timeout 120
 end
 
 coreo_agent_rule_runner 'agent-rules' do
   action :run
   rules ${AUDIT_AGENT_RULES_LIST}
+  profiles ['linux-cis', 'linux-benchmark']
 end
