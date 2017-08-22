@@ -1,4 +1,11 @@
 variables:
+  AUDIT_AGENT_PROFILES_LIST:
+      required: false
+      type: array
+      default:
+        - linux-cis
+        - agent-rules
+
   AUDIT_AGENT_RULES_LIST:
       required: false
       type: array
